@@ -22,41 +22,45 @@
     <script>
         let saved = null;
 
-        fetch('/data').then(data => data.json()).then(data => {
-            console.log(data);
-            saved = data;
-            if(data["BTCPrice"]) {
-                document.getElementById('btc').innerHTML = data["BTCPrice"];
-            }
+        function pullData() {
+            fetch('/data').then(data => data.json()).then(data => {
+                console.log(data);
+                saved = data;
+                if(data["BTCPrice"]) {
+                    document.getElementById('btc').innerHTML = data["BTCPrice"];
+                }
 
-            if(data["message"]) {
-                document.getElementById('message').value = data["message"];
-            }
+                if(data["message"]) {
+                    document.getElementById('message').value = data["message"];
+                }
 
-            if(data["temp"]) {
-                document.getElementById('temp').innerHTML = data["temp"];
-            }
+                if(data["temp"]) {
+                    document.getElementById('temp').innerHTML = data["temp"];
+                }
 
-            if(data["pin8"]) {
-                document.getElementById('pin8').value = data["pin8"];
-            }
+                if(data["pin8"]) {
+                    document.getElementById('pin8').value = data["pin8"];
+                }
 
-            if(data["pin9"]) {
-                document.getElementById('pin9').value = data["pin9"];
-            }
+                if(data["pin9"]) {
+                    document.getElementById('pin9').value = data["pin9"];
+                }
 
-            if(data["pin10"]) {
-                document.getElementById('pin10').value = data["pin10"];
-            }
+                if(data["pin10"]) {
+                    document.getElementById('pin10').value = data["pin10"];
+                }
 
-            if(data["pin11"]) {
-                document.getElementById('pin11').value = data["pin11"];
-            }
+                if(data["pin11"]) {
+                    document.getElementById('pin11').value = data["pin11"];
+                }
 
-            if(data["pin12"]) {
-                document.getElementById('pin12').value = data["pin12"];
-            }
-        });
+                if(data["pin12"]) {
+                    document.getElementById('pin12').value = data["pin12"];
+                }
+            });
+        }
+
+        pullData();
 
         // Source of this function - https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
         async function postData(url = '', data = {}) {
@@ -106,6 +110,8 @@
             if(saved["pin12"] != pin12 && (pin12 == 1 || pin12 == 0)) {
                 postData('/pin12', { "val": pin12 })
             }
+
+            pullData();
         }
     </script>
 </body>
