@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP01</title>
+</head>
+<body>
+    <h1>Status</h1>
+    <div>BTC = <div id="btc"></div></div>
+    <div>Temperature in Kundapur = <div id="temp"></div></div>
+    <div>Message = <input id="message"></input></div>
+    <div>Pin 8 (0/1) = <input id="pin8"></input></div>
+    <div>Pin 9 (0/1) = <input id="pin9"></input></div>
+    <div>Pin 10 (0/1) = <input id="pin10"></input></div>
+    <div>Pin 11 (0/1) = <input id="pin11"></input></div>
+    <div>Pin 12 (0/1) = <input id="pin12"></input></div>
+
+    <button type="button" onclick="POST()">Update</button>
+    
+    <script>
+        let saved = null;
+
+        fetch('/data').then(data => data.json()).then(data => {
+            console.log(data);
+            saved = data;
+            if(data["BTCPrice"]) {
+                document.getElementById('btc').innerHTML = data["BTCPrice"];
+            }
+
+            if(data["message"]) {
+                document.getElementById('message').value = data["message"];
+            }
+
+            if(data["temp"]) {
+                document.getElementById('temp').innerHTML = data["temp"];
+            }
+
+            if(data["pin8"]) {
+                document.getElementById('pin8').value = data["pin8"];
+            }
+
+            if(data["pin9"]) {
+                document.getElementById('pin9').value = data["pin9"];
+            }
+
+            if(data["pin10"]) {
+                document.getElementById('pin10').value = data["pin10"];
+            }
+
+            if(data["pin11"]) {
+                document.getElementById('pin11').value = data["pin11"];
+            }
+
+            if(data["pin12"]) {
+                document.getElementById('pin12').value = data["pin12"];
+            }
+        });
+
+        // Source of this function - https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+        async function postData(url = '', data = {}) {
+            const response = await fetch(url, {
+                method: 'POST', // *GET, POST, PUT, DELETE, etc.
+                mode: 'cors', // no-cors, *cors, same-origin
+                cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+                credentials: 'same-origin', // include, *same-origin, omit
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                redirect: 'follow', // manual, *follow, error
+                referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+                body: JSON.stringify(data) // body data type must match "Content-Type" header
+            });
+            return response.json(); // parses JSON response into native JavaScript objects
+        }
+
+        function POST() {
+            // Too many post requests possible ... Bad API design ... sadly can't do anythin I'm in a hurry
+            let message =  document.getElementById('message').value;
+            if(saved["message"] != message) {
+                postData('/message', { message })
+            }
+
+            let pin8 =  document.getElementById('pin8').value;
+            if(saved["pin8"] != pin8 && (pin8 == 1 || pin8 == 0)) {
+                postData('/pin8', { "val": pin8 })
+            }
+            
+            let pin9 =  document.getElementById('pin9').value;
+            if(saved["pin9"] != pin9 && (pin9 == 1 || pin9 == 0)) {
+                postData('/pin9', { "val": pin9 })
+            }
+
+            let pin10 =  document.getElementById('pin10').value;
+            if(saved["pin10"] != pin10 && (pin10 == 1 || pin10 == 0)) {
+                postData('/pin10', { "val": pin10 })
+            }
+
+            let pin11 =  document.getElementById('pin11').value;
+            if(saved["pin11"] != pin11 && (pin11 == 1 || pin11 == 0)) {
+                postData('/pin11', { "val": pin11 })
+            }
+
+            let pin12 =  document.getElementById('pin12').value;
+            if(saved["pin12"] != pin12 && (pin12 == 1 || pin12 == 0)) {
+                postData('/pin12', { "val": pin12 })
+            }
+        }
+    </script>
+</body>
+</html>

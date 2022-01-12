@@ -1,0 +1,24 @@
+{
+  "name": "iot-esp01-arduino",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RohanK22/IoT-esp01-arduino.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RohanK22/IoT-esp01-arduino/issues"
+  },
+  "homepage": "https://github.com/RohanK22/IoT-esp01-arduino#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "express": "^4.17.2"
+  }
+}
