@@ -17,7 +17,6 @@ const port = 3000;
 // BTC Price API - https://blockchain.info/ticker
 
 let message = "Hi This is Rohan";
-let pin8 = "0"; // Dummy LED Pin By Default is Low
 let pin9 = "0"; // 
 let pin10 = "0"; // 
 let pin11 = "0"; //
@@ -48,13 +47,6 @@ function updateTemp() {
         console.log(error);
     });
 }
-
-app.post('/pin8', (req, res) => {
-    if(req.body && (req.body.val == 0 || req.body.val == 1)) pin8 = String(req.body.val);
-    res.json({
-        "val": pin8
-    });
-});
 
 app.post('/pin9', (req, res) => {
     if(req.body && (req.body.val == 0 || req.body.val == 1)) pin9 = String(req.body.val);
@@ -100,7 +92,6 @@ app.get('/data', (req, res) => {
           "BTCPrice": BTCPrice,
           "temp": temp,
           "message": message,
-          "pin8": pin8,
           "pin9": pin9,
           "pin10": pin10,
           "pin11": pin11,

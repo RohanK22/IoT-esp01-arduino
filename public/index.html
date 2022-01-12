@@ -11,7 +11,6 @@
     <div>BTC = <div id="btc"></div></div>
     <div>Temperature in Kundapur = <div id="temp"></div></div>
     <div>Message = <input id="message"></input></div>
-    <div>Pin 8 (0/1) = <input id="pin8"></input></div>
     <div>Pin 9 (0/1) = <input id="pin9"></input></div>
     <div>Pin 10 (0/1) = <input id="pin10"></input></div>
     <div>Pin 11 (0/1) = <input id="pin11"></input></div>
@@ -36,10 +35,6 @@
 
                 if(data["temp"]) {
                     document.getElementById('temp').innerHTML = data["temp"];
-                }
-
-                if(data["pin8"]) {
-                    document.getElementById('pin8').value = data["pin8"];
                 }
 
                 if(data["pin9"]) {
@@ -86,11 +81,6 @@
                 postData('/message', { message })
             }
 
-            let pin8 =  document.getElementById('pin8').value;
-            if(saved["pin8"] != pin8 && (pin8 == 1 || pin8 == 0)) {
-                postData('/pin8', { "val": pin8 })
-            }
-            
             let pin9 =  document.getElementById('pin9').value;
             if(saved["pin9"] != pin9 && (pin9 == 1 || pin9 == 0)) {
                 postData('/pin9', { "val": pin9 })
