@@ -17,7 +17,6 @@ const port = 3000;
 // BTC Price API - https://blockchain.info/ticker
 
 let message = "Hi This is Rohan";
-let pin9 = "0"; // 
 let pin10 = "0"; // 
 let pin11 = "0"; //
 let pin12 = "0"; // Buzzer 
@@ -47,13 +46,6 @@ function updateTemp() {
         console.log(error);
     });
 }
-
-app.post('/pin9', (req, res) => {
-    if(req.body && (req.body.val == 0 || req.body.val == 1)) pin9 = String(req.body.val);
-    res.json({
-        "val": pin9
-    });
-});
 
 app.post('/pin10', (req, res) => {
     if(req.body && (req.body.val == 0 || req.body.val == 1)) pin10 = String(req.body.val);
@@ -92,7 +84,6 @@ app.get('/data', (req, res) => {
           "BTCPrice": BTCPrice,
           "temp": temp,
           "message": message,
-          "pin9": pin9,
           "pin10": pin10,
           "pin11": pin11,
           "pin12": pin12,

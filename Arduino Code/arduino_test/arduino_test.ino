@@ -1,11 +1,13 @@
 #include<SoftwareSerial.h>
 #include<ArduinoJson.h>
+#include <LiquidCrystal.h>
 
 SoftwareSerial esp(2,3); // RX, TX  
 
+const int rs = 9, en = 8, d4 = 7, d5 = 6, d6 = 5, d7 = 4;
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+
 void setup() {
-  pinMode(8, OUTPUT);
-  pinMode(9, OUTPUT);
   pinMode(10, OUTPUT);
   pinMode(11, OUTPUT);
   pinMode(12, OUTPUT);
@@ -52,22 +54,16 @@ void loop() {
     const char* m = doc["message"];
     const char* btc = doc["BTCPrice"];
     const char* temp = doc["temp"];
-    const char* pin8 = doc["pin8"];
-    const char* pin9 = doc["pin9"];
     const char* pin10 = doc["pin10"];
     const char* pin11 = doc["pin11"];
     const char* pin12 = doc["pin12"];
     Serial.println(m);
     Serial.println(btc);
     Serial.println(temp);
-    Serial.println(pin8);
-    Serial.println(pin9);
     Serial.println(pin10);
     Serial.println(pin11);
     Serial.println(pin12);
 
-    setPinVal(8, pin8);
-    setPinVal(9, pin9);
     setPinVal(10, pin10);
     setPinVal(11, pin11);
     setPinVal(12, pin12);
